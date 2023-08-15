@@ -1327,8 +1327,10 @@ function HDXLib:CreateWindow(Settings)
         end
 
         if isfile(HDXFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension) then
+        for _, MKey in ipairs(Settings.KeySettings.Key) do
             if string.find(readfile(HDXFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension), MKey) then
                 Passthrough = true
+                end
             end
         end
 
