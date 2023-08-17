@@ -2678,6 +2678,11 @@ function HDXLib:CreateWindow(Settings)
                 section = ToggleSettings.SectionParent,
                 element = Toggle
             }
+			if ToggleSettings.CurrentValue == true then
+				local Success, Response = pcall(function()
+					ToggleSettings.Callback(ToggleSettings.CurrentValue)
+				end)
+			end
             AddInfos(Toggle,ToggleSettings,"toggle")
             if ToggleSettings.SectionParent then
                 Toggle.Parent = ToggleSettings.SectionParent.Holder
