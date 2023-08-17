@@ -1999,10 +1999,7 @@ function HDXLib:CreateWindow(Settings)
             }
             if SectionParent or ParagraphSettings.SectionParent.Holder then
                 Paragraph.Parent = SectionParent.Holder or ParagraphSettings.SectionParent.Holder
-            else
-                Paragraph.Parent = TabPage
-            end
-            if SectionParent.Holder or ParagraphSettings.SectionParent.Holder == nil then
+            elseif SectionParent or ParagraphSettings.SectionParent.Holder == nil then
                 Paragraph.Parent = TabPage
             end
             Paragraph.Content.Size = UDim2.new(0, 438, 0, Paragraph.Content.TextBounds.Y)
@@ -3540,10 +3537,6 @@ end
 
 function HDXLib:GetPlayerAvatarBust(UserId)
     return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType.AvatarBust, Enum.ThumbnailSize.Size420x420)
-end
-
-function HDXLib:GetPlayerAvatarHeadShot(UserId)
-    return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
 end
 
 function HDXLib:GetPlayerAvatarThumbnail(UserId)
