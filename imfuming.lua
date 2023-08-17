@@ -158,6 +158,7 @@ local Topbar = Main.Topbar
 local Elements = Main.Elements
 local LoadingFrame = Main.LoadingFrame
 local TopList = Main.TabList
+local TabList = TopList
 local SideList = Main.SideTabList.Holder
 local TabsList = TopList and SideList
 local SearchBar = Main.Searchbar
