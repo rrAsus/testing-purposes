@@ -3,7 +3,7 @@ return {
     News = { 
         '[+] Changed To A Better UI',
     },
-    Title = 'The Intruders',
+    Title = 'Javolo Hub Universal',
     MainText = '',
     DelayToDestroy = 60,
     From = 'FakeBadger (Script Owner)', 
