@@ -798,7 +798,6 @@ function Hide()
             for _, element in ipairs(tab:GetChildren()) do
                 if element.ClassName == "Frame" then
                     if element.Name ~= "SectionSpacing" and element.Name ~= "Placeholder" then
-                        print(element)
                         if element:FindFirstChild("Holder") then
                             TweenService:Create(element, TweenInfo.new(0.2, Enum.EasingStyle.Quint), {BackgroundTransparency = 1}):Play()
                             TweenService:Create(element.Title, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
@@ -3247,7 +3246,6 @@ function HDXLib:CreateWindow(Settings)
 
         if PromptSettings.Actions then
             for name,info in pairs(PromptSettings.Actions) do
-                print(info)
                 local Button = PromptUI.Buttons.Template:Clone()
                 Button.TextLabel.Text = info.Name
                 Button.Interact.MouseButton1Up:Connect(function()
