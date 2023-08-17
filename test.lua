@@ -726,20 +726,20 @@ function HDXLib:Notify(NotificationSettings)
         Notification.Actions.Template.Visible = false
 
         if NotificationSettings.Actions then
-            for _, Action in pairs(NotificationSettings.Actions) do
-                ActionCompleted = false
-                local NewAction = Notification.Actions.Template:Clone()
-                NewAction.BackgroundColor3 = SelectedTheme.NotificationActionsBackground
-                if SelectedTheme ~= HDXLib.Theme.Default then
-                    NewAction.TextColor3 = SelectedTheme.TextColor
-                end
-                NewAction.Name = Action.Name
-                NewAction.Visible = true
-                NewAction.Parent = Notification.Actions
-                NewAction.Text = Action.Name
-                NewAction.BackgroundTransparency = 1
-                NewAction.TextTransparency = 1
-                NewAction.Size = UDim2.new(0, NewAction.TextBounds.X + 27, 0, 36)
+			for _, Action in pairs(NotificationSettings.Actions) do
+				ActionCompleted = false
+				local NewAction = Notification.Actions.Template:Clone()
+				NewAction.BackgroundColor3 = SelectedTheme.NotificationActionsBackground
+				if SelectedTheme ~= RayfieldLibrary.Theme.Default then
+					NewAction.TextColor3 = SelectedTheme.TextColor
+				end
+				NewAction.Name = Action.Name
+				NewAction.Visible = true
+				NewAction.Parent = Notification.Actions
+				NewAction.Text = Action.Name
+				NewAction.BackgroundTransparency = 1
+				NewAction.TextTransparency = 1
+				NewAction.Size = UDim2.new(0, NewAction.TextBounds.X + 27, 0, 36)
 
                 NewAction.MouseButton1Click:Connect(function()
                     local Success, Response = pcall(Action.Callback)
@@ -750,18 +750,18 @@ function HDXLib:Notify(NotificationSettings)
                 end)
             end
         end
-        Notification.BackgroundColor3 = SelectedTheme.Background
-        Notification.Title.Text = NotificationSettings.Title or "Unknown"
-        Notification.Title.TextTransparency = 1
-        Notification.Title.TextColor3 = SelectedTheme.TextColor
-        Notification.Description.Text = NotificationSettings.Content or "Unknown"
-        Notification.Description.TextTransparency = 1
-        Notification.Description.TextColor3 = SelectedTheme.TextColor
-        Notification.Icon.ImageColor3 = SelectedTheme.TextColor
+		Notification.BackgroundColor3 = SelectedTheme.Background
+		Notification.Title.Text = NotificationSettings.Title or "Unknown"
+		Notification.Title.TextTransparency = 1
+		Notification.Title.TextColor3 = SelectedTheme.TextColor
+		Notification.Description.Text = NotificationSettings.Content or "Unknown"
+		Notification.Description.TextTransparency = 1
+		Notification.Description.TextColor3 = SelectedTheme.TextColor
+		Notification.Icon.ImageColor3 = SelectedTheme.TextColor
         if NotificationSettings.Image then
-            Notification.Icon.Image = HDXLib:DoImage(NotificationSettings.Image)
+            Notification.Icon.Image = "rbxassetid://"..tostring(NotificationSettings.Image) 
         else
-            Notification.Icon.Image = HDXLib:DoImage(3944680095)
+            Notification.Icon.Image = "rbxassetid://3944680095"
         end
 
         Notification.Icon.ImageTransparency = 1
@@ -1153,7 +1153,7 @@ function OpenSideBar()
 end
 function Minimise()
     Debounce = true
-    Topbar.ChangeSize.Image = HDXLib:DoImage(11036884234)
+    Topbar.ChangeSize.Image = "rbxassetid://"..11036884234
     if not SearchHided then
         spawn(CloseSearch)
     end
