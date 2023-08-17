@@ -1,7 +1,7 @@
 return {
     Version = "", -- Change this to the version of your script
     News = { 
-        '> Changed To A Better UI',
+        '[+] Changed To A Better UI',
     },
     Title = 'The Intruders',
     MainText = '',
