@@ -187,41 +187,6 @@ local Notifications = HDX.Notifications
 
 local SelectedTheme = HDXLib.Theme.Default
 
-function HDXLib:GetPlayerHeadShot(UserId)
-    return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
-end
-
-function HDXLib:DoImage(data)
-    local id = 0
-    local players = {}
-    
-    for _, v in pairs(Players:GetPlayers()) do
-        players[#players + 1] = v.Name
-    end
-    
-    if type(data) == "string" then -- rbxassetid check
-        if data:sub(1, 3):lower() == "rbx" then
-            id = data:sub(4)
-        end
-    end
-    
-    if typeof(data) == "Instance" then
-        if data:IsA("Player") then -- player instance check
-            id = HDXLib:GetPlayerHeadShot(data.UserId)
-        end
-        
-        if data:IsA("ImageLabel") or data:IsA("ImageButton") then -- image instance check
-            id = data.Image
-        end
-    end
-    
-    if typeof(data) == "number" then
-        id = tonumber(data) -- normal image asset id check
-    end
-    
-    return id
-end
-
 function ChangeTheme(ThemeName)
     SelectedTheme = HDX.Theme[ThemeName]
     for _, obj in ipairs(HDX:GetDescendants()) do
@@ -319,7 +284,7 @@ local function FadeDescription(Infos,type,Out:boolean?)
             InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
         else
             InfoPrompt.ImageLabel.Visible = true
-            InfoPrompt.ImageLabel.Image = HDXLib:DoImage(Infos.Info.Image)
+            InfoPrompt.ImageLabel.Image = 'rbxassetid://'..Infos.Info.Image
             InfoPrompt.Description.Position = UDim2.new(.5,0,0,160)
         end
 
@@ -655,7 +620,7 @@ function qNotePrompt(PromptSettings)
     --Settings
     NotePrompt.Title.Text = PromptSettings.Title or ""
     NotePrompt.Description.Text = PromptSettings.Description or ""
-    NotePrompt.Icon.Image = PromptSettings.Icon or HDXLib:DoImage(4483362748)
+    NotePrompt.Icon.Image = PromptSettings.Icon or 'rbxassetid://'..4483362748
     NotePrompt.Load.BackgroundColor3 = PromptSettings.Color or Color3.fromRGB(90, 90, 90)
     NotePrompt.Load.MouseButton1Down:Once(function(x,y)
         CloseNPrompt()
@@ -3534,17 +3499,25 @@ function HDXLib:FindPlayerByPartial(playername)
     end
 end
 
-function HDXLib:GetPlayerAvatarBust(UserId)
-    return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType.AvatarBust, Enum.ThumbnailSize.Size420x420)
+function NSUILibrary:GetPlayerThumbnail(data, thumbnailtype)
+	local UserId = nil
+	if NSUILibrary:IsNumeric(data) then
+		UserId = data
+	elseif NSUILibrary:IsAlpha(data) then
+		UserId = NSUILibrary:FindPlayer(data).UserId
+	elseif data.Parent and data.Parent == Players then
+		UserId = data.UserId
+	end
+	if Enum.ThumbnailType[thumbnailtype] then
+		return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType[thumbnailtype], Enum.ThumbnailSize.Size420x420)
+	else
+		return "rbxassetid://284402785"
+	end
 end
 
-function HDXLib:GetPlayerAvatarHeadShot(UserId)
-    return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
-end
-
-function HDXLib:GetPlayerAvatarThumbnail(UserId)
-    return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size420x420)
-end
+-- NSUILibrary:GetPlayerThumbnail(userid, "AvatarBust")
+-- NSUILibrary:GetPlayerThumbnail(userid, "AvatarThumbnail")
+-- NSUILibrary:GetPlayerThumbnail(userid, "HeadShot")
 
 function HDXLib:IsR15(plr)
     return HDXLib:FFCOC(plr.Character, "Humanoid").RigType == Enum.RigType.R15
