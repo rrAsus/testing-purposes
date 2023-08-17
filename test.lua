@@ -3410,6 +3410,18 @@ Player = Players.LocalPlayer
 
 VirtualUser = game:GetService("VirtualUser")
 
+function HDXLib:IsNumeric(data)
+    return tonumber(data)
+end
+
+function HDXLib:IsAlpha(data)
+    return not tonumber(data)
+end
+
+function HDXLib:IsAlphaAndOrNumeric(data)
+    return data:match("[^%w]") == nil
+end
+
 function HDXLib:GetPlayerThumbnail(data, thumbnailtype)
 	local UserId = nil
 	if HDXLib:IsNumeric(data) then
@@ -3432,18 +3444,6 @@ end
 
 function HDXLib:IsR15(plr)
     return HDXLib:FFCOC(plr.Character, "Humanoid").RigType == Enum.RigType.R15
-end
-
-function HDXLib:IsNumeric(data)
-    return tonumber(data)
-end
-
-function HDXLib:IsAlpha(data)
-    return not tonumber(data)
-end
-
-function HDXLib:IsAlphaAndOrNumeric(data)
-    return data:match("[^%w]") == nil
 end
 
 HDXLib.Player = {}
