@@ -1051,7 +1051,7 @@ end)
 
 function Maximise()
     Debounce = true
-    Topbar.ChangeSize.Image = HDXLib:DoImage(10137941941)
+    Topbar.ChangeSize.Image = "rbxassetid://"..10137941941
 
     TweenService:Create(Topbar.UIStroke, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
     TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {ImageTransparency = 0.4}):Play()
