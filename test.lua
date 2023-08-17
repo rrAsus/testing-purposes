@@ -1997,8 +1997,8 @@ function HDXLib:CreateWindow(Settings)
                 section = ParagraphSettings.SectionParent,
                 element = Paragraph
             }
-            if SectionParent or ParagraphSettings.SectionParent.Holder then
-                Paragraph.Parent = SectionParent.Holder or ParagraphSettings.SectionParent.Holder
+            if SectionParent or ParagraphSettings.SectionParent then
+                Paragraph.Parent = SectionParent.Holder or ParagraphSettings.SectionParent
             elseif SectionParent or ParagraphSettings.SectionParent.Holder == nil then
                 Paragraph.Parent = TabPage
             end
