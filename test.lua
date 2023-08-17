@@ -265,28 +265,28 @@ local function FadeDescription(Infos,type,Out:boolean?)
         Transparency = 1
         waitTime = nil
     end
-    if not Out then
-        -- Set the Status
-        if type == "slider" then
-            InfoPrompt.Status.Text = Infos.CurrentValue
-        elseif type == "button" then
-            InfoPrompt.Status.Text = "Clickable"
-        elseif type == "toggle" then
-            InfoPrompt.Status.Text,InfoPrompt.Status.TextColor3 = BoolToText(Infos.CurrentValue)
-        elseif type == "dropdown" then
-            --=| Do this |=--
-        elseif type == "colorpicker" then
-            InfoPrompt.Status.Text = Infos.Color.R..Infos.Color.G..Infos.Color.B
-        end
+	if not Out then
+		-- Set the Status
+		if type == 'slider' then
+			InfoPrompt.Status.Text = Infos.CurrentValue
+		elseif type == 'button' then
+			InfoPrompt.Status.Text = 'Clickable'
+		elseif type == 'toggle' then
+			InfoPrompt.Status.Text,InfoPrompt.Status.TextColor3 = BoolToText(Infos.CurrentValue)
+		elseif type == 'dropdown' then
+			--=| Do this |=--
+		elseif type == 'colorpicker' then
+			InfoPrompt.Status.Text = Infos.Color.R..Infos.Color.G..Infos.Color.B
+		end
 
-        if not Infos.Info.Image then
-            InfoPrompt.ImageLabel.Visible = false
-            InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
-        else
-            InfoPrompt.ImageLabel.Visible = true
-            InfoPrompt.ImageLabel.Image = 'rbxassetid://'..Infos.Info.Image
-            InfoPrompt.Description.Position = UDim2.new(.5,0,0,160)
-        end
+		if not Infos.Info.Image then
+			InfoPrompt.ImageLabel.Visible = false
+			InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
+		else
+			InfoPrompt.ImageLabel.Visible = true
+			InfoPrompt.ImageLabel.Image = 'rbxassetid://'..Infos.Info.Image
+			InfoPrompt.Description.Position = UDim2.new(.5,0,0,160)
+		end
 
         InfoPrompt.Title.Text = Infos.Info.Title
         InfoPrompt.Description.Text = Infos.Info.Description
