@@ -1597,12 +1597,14 @@ function HDXLib:CreateWindow(Settings)
 
         TopTabButton.Size = UDim2.new(0, TopTabButton.Title.TextBounds.X + 30, 0, 30)
 		if Image then
-			TabButton.Title.AnchorPoint = Vector2.new(0, 0.5)
-			TabButton.Title.Position = UDim2.new(0, 37, 0.5, 0)
-			TabButton.Image.Image = "rbxassetid://"..Image
-			TabButton.Image.Visible = true
-			TabButton.Title.TextXAlignment = Enum.TextXAlignment.Left
-			TabButton.Size = UDim2.new(0, TabButton.Title.TextBounds.X + 46, 0, 30)
+			TopTabButton.Image.Image = "rbxassetid://"..Image
+			SideTabButton.Image.Image = "rbxassetid://"..Image
+
+			TopTabButton.Title.AnchorPoint = Vector2.new(0, 0.5)
+			TopTabButton.Title.Position = UDim2.new(0, 37, 0.5, 0)
+			TopTabButton.Image.Visible = true
+			TopTabButton.Title.TextXAlignment = Enum.TextXAlignment.Left
+			TopTabButton.Size = UDim2.new(0, TopTabButton.Title.TextBounds.X + 46, 0, 30)
 		end
         TopTabButton.BackgroundTransparency = 1
         TopTabButton.Title.TextTransparency = 1
