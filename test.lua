@@ -318,7 +318,7 @@ function AddInfos(Object:Frame,Settings,type)
         end
     end)
     Object.MouseLeave:Connect(function()
-        FadeDescription(nil,nil,true)
+        FadeDescription()
     end)
 end
 local function PackColor(Color)
@@ -835,7 +835,7 @@ function Hide()
         spawn(CloseSideBar)
     end
     spawn(function()
-        FadeDescription(nil,true)
+        FadeDescription()
     end)
     Debounce = true
     HDXLib:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping RightShift", Duration = 7})
