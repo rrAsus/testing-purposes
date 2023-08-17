@@ -255,72 +255,6 @@ function BoolToText(Bool)
         return "DISABLED",Color3.fromRGB(186, 44, 44)
     end
 end
-
-local function FadeDescription(Infos,type,Out:boolean?)
-    local Size = UDim2.fromOffset(230,275)
-    local Transparency = 0
-    local waitTime = .05
-    if Out then
-        Size = UDim2.fromOffset(212,254)
-        Transparency = 1
-        waitTime = nil
-    end
-	if not Out then
-		-- Set the Status
-		if type == 'slider' then
-			InfoPrompt.Status.Text = Infos.CurrentValue
-		elseif type == 'button' then
-			InfoPrompt.Status.Text = 'Clickable'
-		elseif type == 'toggle' then
-			InfoPrompt.Status.Text,InfoPrompt.Status.TextColor3 = BoolToText(Infos.CurrentValue)
-		elseif type == 'dropdown' then
-			--=| Do this |=--
-		elseif type == 'colorpicker' then
-			InfoPrompt.Status.Text = Infos.Color.R..Infos.Color.G..Infos.Color.B
-		end
-
-		if not Infos.Info.Image then
-			InfoPrompt.ImageLabel.Visible = false
-			InfoPrompt.Description.Position = InfoPrompt.ImageLabel.Position
-		else
-			InfoPrompt.ImageLabel.Visible = true
-			InfoPrompt.ImageLabel.Image = 'rbxassetid://'..Infos.Info.Image
-			InfoPrompt.Description.Position = UDim2.new(.5,0,0,160)
-		end
-
-        InfoPrompt.Title.Text = Infos.Info.Title
-        InfoPrompt.Description.Text = Infos.Info.Description
-    end
-    TweenService:Create(InfoPrompt,TweenInfo.new(.3,Enum.EasingStyle.Quint,Enum.EasingDirection.Out),{
-        Size = Size,BackgroundTransparency = Transparency
-    }):Play()
-    TweenService:Create(InfoPrompt.ImageLabel,TweenInfo.new(.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{
-        ImageTransparency = Transparency
-    }):Play()
-    TweenService:Create(InfoPrompt.Description,TweenInfo.new(.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{
-        TextTransparency = Transparency
-    }):Play()
-    TweenService:Create(InfoPrompt.Status,TweenInfo.new(.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{
-        TextTransparency = Transparency
-    }):Play()
-    TweenService:Create(InfoPrompt.Title,TweenInfo.new(.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{
-        TextTransparency = Transparency
-    }):Play()
-end
-
-function AddInfos(Object:Frame,Settings,type)
-    --local Interact = Object:FindFirstChild("Interact") or Object:FindFirstChild("Main"):FindFirstChild("Interact")
-    Object.MouseEnter:Connect(function(input)
-        --if not (input.UserInputType == Enum.UserInputType.MouseButton2) then return end
-        if Settings and Settings.Info then
-            InfoPromptOpen = true
-            FadeDescription(Settings,type)
-        end
-    end)
-    Object.MouseLeave:Connect(function()
-        FadeDescription(nil,nil,true)
-    end)
-end
 local function PackColor(Color)
     return {R = Color.R * 255, G = Color.G * 255, B = Color.B * 255}
 end    
@@ -834,9 +768,6 @@ function Hide()
     if not SideBarClosed then
         spawn(CloseSideBar)
     end
-    spawn(function()
-        FadeDescription(nil,true)
-    end)
     Debounce = true
     HDXLib:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping RightShift", Duration = 7})
     TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 470, 0, 400)}):Play()
@@ -1125,9 +1056,6 @@ function Minimise()
     if not SideBarClosed then
         spawn(CloseSideBar)
     end
-    spawn(function()
-        FadeDescription(nil,true)
-    end)
     for _, tabbtn in ipairs(TopList:GetChildren()) do
         if tabbtn.ClassName == "Frame" and tabbtn.Name ~= "Placeholder" then
             TweenService:Create(tabbtn, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundTransparency = 1}):Play()
@@ -1692,7 +1620,6 @@ function HDXLib:CreateWindow(Settings)
                 section = ButtonSettings.SectionParent,
                 element = Button
             }
-            AddInfos(Button,ButtonSettings.Info,"button")
 
             Button.Name = ButtonSettings.Name
             Button.Title.Text = ButtonSettings.Name
@@ -2003,7 +1930,6 @@ function HDXLib:CreateWindow(Settings)
             else
                 Input.Parent = TabPage
             end
-            AddInfos(Input,InputSettings.Info,"input")
             Input.BackgroundTransparency = 1
             Input.UIStroke.Transparency = 1
             Input.Title.TextTransparency = 1
@@ -2101,7 +2027,6 @@ function HDXLib:CreateWindow(Settings)
             DropdownSettings.Items = {
                 Selected = {Default = DropdownSettings.Selected or nil}
             }
-            AddInfos(Dropdown,DropdownSettings,"dropdown")
             DropdownSettings.Locked = false
             local Multi = DropdownSettings.MultiSelection or false
             if string.find(DropdownSettings.Name,"closed") then
@@ -2493,7 +2418,6 @@ function HDXLib:CreateWindow(Settings)
             else
                 Keybind.Parent = TabPage
             end
-            AddInfos(Keybind,KeybindSettings,"keybind")
 
             Keybind.BackgroundTransparency = 1
             Keybind.UIStroke.Transparency = 1
@@ -2646,7 +2570,6 @@ function HDXLib:CreateWindow(Settings)
 					ToggleSettings.Callback(ToggleSettings.CurrentValue)
 				end)
 			end
-            AddInfos(Toggle,ToggleSettings,"toggle")
             if ToggleSettings.SectionParent then
                 Toggle.Parent = ToggleSettings.SectionParent.Holder
             else
@@ -2816,7 +2739,6 @@ function HDXLib:CreateWindow(Settings)
                 section = ColorPickerSettings.SectionParent,
                 element = ColorPicker
             }
-            AddInfos(ColorPicker,ColorPickerSettings,"colorpicker")
             local Background = ColorPicker.CPBackground
             local Display = Background.Display
             local Main = Background.MainCP
@@ -3102,7 +3024,6 @@ function HDXLib:CreateWindow(Settings)
                 section = SliderSettings.SectionParent,
                 element = Slider
             }
-            AddInfos(Slider,SliderSettings,"slider")
             if SliderSettings.SectionParent then
                 Slider.Parent = SliderSettings.SectionParent.Holder
             else
