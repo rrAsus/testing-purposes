@@ -3487,6 +3487,10 @@ function HDXLib:FindPlayerByPartial(playername)
     end
 end
 
+Player = Players.LocalPlayer
+
+VirtualUser = game:GetService("VirtualUser")
+
 function HDXLib:GetPlayerThumbnail(data, thumbnailtype)
 	local UserId = nil
 	if HDXLib:IsNumeric(data) then
