@@ -3475,18 +3475,6 @@ end
 
 -- own
 
-function HDXLib:IsNumeric(data)
-    return tonumber(data)
-end
-
-function HDXLib:IsAlpha(data)
-    return not tonumber(data)
-end
-
-function HDXLib:IsAlphaAndOrNumeric(data)
-    return data:match("[^%w]") == nil
-end
-
 function HDXLib:FindPlayerByPartial(playername)
     if playername == "me" then 
         return LocalPlayer
@@ -3522,6 +3510,21 @@ end
 function HDXLib:IsR15(plr)
     return HDXLib:FFCOC(plr.Character, "Humanoid").RigType == Enum.RigType.R15
 end
+
+function HDXLib:IsNumeric(data)
+    return tonumber(data)
+end
+
+function HDXLib:IsAlpha(data)
+    return not tonumber(data)
+end
+
+function HDXLib:IsAlphaAndOrNumeric(data)
+    return data:match("[^%w]") == nil
+end
+
+HDXLib.Player = {}
+HDXLib.Player.HeadShot = HDXLib:GetPlayerThumbnail(Player.UserId, "HeadShot")
 
 function HDXLib:FFC(instance, name)
     return instance:FindFirstChild(tostring(name))
