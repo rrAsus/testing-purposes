@@ -751,7 +751,7 @@ function HDXLib:Notify(NotificationSettings)
         if getgenv().SecureMode == nil then
             TweenService:Create(Notification, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.4}):Play()
         else
-            if not false then
+            if not getgenv().SecureMode then
                 TweenService:Create(Notification, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.4}):Play()
             else 
                 TweenService:Create(Notification, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
