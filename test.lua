@@ -3504,7 +3504,7 @@ function HDXLib:GetPlayerThumbnail(data, thumbnailtype)
 	if HDXLib:IsNumeric(data) then
 		UserId = data
 	elseif HDXLib:IsAlpha(data) then
-		UserId = NSUILibrary:FindPlayer(data).UserId
+		UserId = HDXLib:FindPlayer(data).UserId
 	elseif data.Parent and data.Parent == Players then
 		UserId = data.UserId
 	end
