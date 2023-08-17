@@ -769,7 +769,7 @@ function Hide()
         spawn(CloseSideBar)
     end
     Debounce = true
-    HDXLib:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping RightShift", Duration = 7})
+    HDXLib:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping RightCtrl", Duration = 7})
     TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 470, 0, 400)}):Play()
     TweenService:Create(Main.Topbar, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 470, 0, 45)}):Play()
     TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {BackgroundTransparency = 1}):Play()
@@ -2456,10 +2456,10 @@ function HDXLib:CreateWindow(Settings)
                 TweenService:Create(Keybind, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
             end)
 
-            UserInputService.InputBegan:Connect(function(input, processed)
+            UserInputService.InputBegan:Connect(function(input)
 
                 if CheckingForKey then
-                    if input.KeyCode ~= Enum.KeyCode.Unknown and input.KeyCode ~= Enum.KeyCode.RightShift then
+                    if input.KeyCode ~= Enum.KeyCode.Unknown and input.KeyCode ~= Enum.KeyCode.RightCtrl then
                         local SplitMessage = string.split(tostring(input.KeyCode), ".")
                         local NewKeyNoEnum = SplitMessage[3]
                         Keybind.KeybindFrame.KeybindBox.Text = tostring(NewKeyNoEnum)
@@ -2467,7 +2467,7 @@ function HDXLib:CreateWindow(Settings)
                         Keybind.KeybindFrame.KeybindBox:ReleaseFocus()
                         SaveConfiguration()
                     end
-                elseif KeybindSettings.CurrentKeybind ~= nil and (input.KeyCode == Enum.KeyCode[KeybindSettings.CurrentKeybind] and not processed) then  --Test
+                elseif KeybindSettings.CurrentKeybind ~= nil and (input.KeyCode == Enum.KeyCode[KeybindSettings.CurrentKeybind]) then  --Test
                     local Held = true
                     local Connection
                     Connection = input.Changed:Connect(function(prop)
@@ -3345,8 +3345,8 @@ Topbar.Hide.MouseButton1Click:Connect(function()
     end
 end)
 
-UserInputService.InputBegan:Connect(function(input, processed)
-    if (input.KeyCode == Enum.KeyCode.RightShift and not processed) then
+UserInputService.InputBegan:Connect(function(input)
+    if (input.KeyCode == Enum.KeyCode.RightCtrl) then
         if Debounce then return end
         if Hidden then
             Hidden = false
