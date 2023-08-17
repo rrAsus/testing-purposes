@@ -3499,11 +3499,11 @@ function HDXLib:FindPlayerByPartial(playername)
     end
 end
 
-function NSUILibrary:GetPlayerThumbnail(data, thumbnailtype)
+function HDXLib:GetPlayerThumbnail(data, thumbnailtype)
 	local UserId = nil
-	if NSUILibrary:IsNumeric(data) then
+	if HDXLib:IsNumeric(data) then
 		UserId = data
-	elseif NSUILibrary:IsAlpha(data) then
+	elseif HDXLib:IsAlpha(data) then
 		UserId = NSUILibrary:FindPlayer(data).UserId
 	elseif data.Parent and data.Parent == Players then
 		UserId = data.UserId
@@ -3515,9 +3515,9 @@ function NSUILibrary:GetPlayerThumbnail(data, thumbnailtype)
 	end
 end
 
--- NSUILibrary:GetPlayerThumbnail(userid, "AvatarBust")
--- NSUILibrary:GetPlayerThumbnail(userid, "AvatarThumbnail")
--- NSUILibrary:GetPlayerThumbnail(userid, "HeadShot")
+-- HDXLib:GetPlayerThumbnail(userid, "AvatarBust")
+-- HDXLib:GetPlayerThumbnail(userid, "AvatarThumbnail")
+-- HDXLib:GetPlayerThumbnail(userid, "HeadShot")
 
 function HDXLib:IsR15(plr)
     return HDXLib:FFCOC(plr.Character, "Humanoid").RigType == Enum.RigType.R15
