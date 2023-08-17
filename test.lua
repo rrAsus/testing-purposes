@@ -3540,6 +3540,10 @@ function HDXLib:GetPlayerAvatarBust(UserId)
     return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType.AvatarBust, Enum.ThumbnailSize.Size420x420)
 end
 
+function HDXLib:GetPlayerAvatarHeadShot(UserId)
+    return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
+end
+
 function HDXLib:GetPlayerAvatarThumbnail(UserId)
     return Players:GetUserThumbnailAsync(UserId, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size420x420)
 end
