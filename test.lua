@@ -713,7 +713,7 @@ function HDXLib:Notify(NotificationSettings)
         Notification.Visible = true
 
         local blurlight = nil
-        if not false then
+        if not getgenv().SecureMode then
             blurlight = Instance.new("DepthOfFieldEffect",game:GetService("Lighting"))
             blurlight.Enabled = true
             blurlight.FarIntensity = 0
@@ -783,7 +783,7 @@ function HDXLib:Notify(NotificationSettings)
 
 
         -- Requires Graphics Level 8-10
-        if false == nil then
+        if getgenv().SecureMode == nil then
             TweenService:Create(Notification, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.4}):Play()
         else
             if not false then
@@ -839,7 +839,7 @@ function HDXLib:Notify(NotificationSettings)
         TweenService:Create(Notification.Title, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
         TweenService:Create(Notification.Description, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
         task.wait(0.2)
-        if not false then
+        if not getgenv().SecureMode then
             neon:UnbindFrame(Notification.BlurModule)
             blurlight:Destroy()
         end
